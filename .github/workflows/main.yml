@@ -39,7 +39,7 @@ jobs:
       - name: downloand source Anykernel3 platform/prebuilts/gas/linux-x86 android_prebuilts_clang-standalone
         run: |
           sudo mkdir -p /root/project/build/
-          sudo cd /root/project/build/
+          cd /root/project/build/
           sudo git clone --depth=1 https://github.com/huazhaozhe/Evolution_kernel_xiaomi_sm8250 -b android13-clo kernel
           sudo curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/setup-circle  > setup.sh
           sudo curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/build-kernel  > build-kernel.sh
