@@ -1,0 +1,58 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "upstr" branch
+  push:
+    branches: [ "android13-clo" ]
+  pull_request:
+    branches: [ "android13-clo" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: debian:stable-slim
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+      
+      - name: depend libs
+        run: |
+          apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip python python3 flex cpio libncurses5-dev wget
+      -name: downloand source Anykernel3 platform/prebuilts/gas/linux-x86 android_prebuilts_clang-standalone
+        run: |
+          mkdir -p /root/project/build/
+          cd /root/project/build/
+          git clone --depth=1 https://github.com/huazhaozhe/Evolution_kernel_xiaomi_sm8250 -b android13-clo kernel
+          curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/setup-circle  > setup.sh
+          curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/build-kernel  > build-kernel.sh
+      - name: start build
+        run: |
+          export DEVICE="alioth"
+          export TYPE="0x00"
+          export KBUILD_BUILD_USER="UtsavTheCunt"
+          export KBUILD_BUILD_HOST="CuntsSpace"
+          source setup.sh
+          source build-kernel.sh --aosp-clang
+      - uses: actions/upload-artifact@v3
+        with:
+            name: kernel-anykernel
+            #path: out/arch/arm64/boot
+            path: /root/project/build/kernel/out
