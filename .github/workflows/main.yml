@@ -35,6 +35,7 @@ jobs:
       
       - name: depend libs
         run: |
+          su root
           apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip python2 python3 flex cpio libncurses5-dev wget
       - name: downloand source Anykernel3 platform/prebuilts/gas/linux-x86 android_prebuilts_clang-standalone
         run: |
