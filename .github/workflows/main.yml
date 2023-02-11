@@ -21,7 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -36,7 +36,7 @@ jobs:
       - name: depend libs
         run: |
           apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip python python3 flex cpio libncurses5-dev wget
-      -name: downloand source Anykernel3 platform/prebuilts/gas/linux-x86 android_prebuilts_clang-standalone
+      - name: downloand source Anykernel3 platform/prebuilts/gas/linux-x86 android_prebuilts_clang-standalone
         run: |
           mkdir -p /root/project/build/
           cd /root/project/build/
