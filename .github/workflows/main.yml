@@ -42,8 +42,6 @@ jobs:
           git clone --depth=1 https://github.com/huazhaozhe/Evolution_kernel_xiaomi_sm8250 -b android13-clo kernel
           curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/setup-circle  > setup.sh
           curl https://raw.githubusercontent.com/huazhaozhe/Drone-scripts/circleci/build-kernel  > build-kernel.sh
-      - name: start build
-        run: |
           export DEVICE="alioth"
           export TYPE="0x00"
           export KBUILD_BUILD_USER="UtsavTheCunt"
