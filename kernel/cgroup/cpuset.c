@@ -1990,12 +1990,6 @@ static struct cftype files[] = {
 	},
 
 	{
-		.name = "cpuset.effective_mems",
-		.seq_show = cpuset_common_seq_show,
-		.private = FILE_EFFECTIVE_MEMLIST,
-	},
-
-	{
 		.name = "cpuset.cpu_exclusive",
 		.read_u64 = cpuset_read_u64,
 		.write_u64 = cpuset_write_u64,
@@ -2049,6 +2043,7 @@ static struct cftype files[] = {
 		.write_u64 = cpuset_write_u64,
 		.private = FILE_SPREAD_PAGE,
 	},
+
 	{
 		.name = "cpuset.memory_spread_slab",
 		.read_u64 = cpuset_read_u64,
